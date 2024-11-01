@@ -1,0 +1,26 @@
+parameters:
+  product.manager.slug: "%productsManager.sparkfbt.slug%"
+  product.manager.title: "%productsManager.sparkfbt.title%"
+  product.manager.description: "%productsManager.sparkfbt.description%"
+  product.manager.shortcode: "%productsManager.sparkfbt.shortcode%"
+
+services:
+  _instanceof:
+    Sparkfbt\SparkPlugins\SparkWoo\Common\Modules\ModuleInterface:
+      tags: ["app.module"]
+  products-manager:
+    class: Sparkfbt\SparkPlugins\SparkWoo\FrequentlyBoughtTogether\FrequentlyBoughtTogetherManager
+    arguments:
+      $title: "%product.manager.title%"
+      $slug: "%product.manager.slug%"
+      $description: "%product.manager.description%"
+      $shortcode: "%product.manager.shortcode%"
+      $cacheManager: '@Sparkfbt\SparkPlugins\SparkWoo\Common\Cache\CacheManager'
+  placement-hook-collection:
+    class: Sparkfbt\SparkPlugins\SparkWoo\Common\Collections\DefaultCollection
+    arguments:
+      $items:
+        - "@single-product-after-product-hook"
+        - "@cart-after-cart-hook"
+        - "@checkout-before-form-hook"
+        - "@checkout-after-form-hook"

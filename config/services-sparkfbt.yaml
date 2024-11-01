@@ -1,0 +1,14 @@
+parameters:
+  plugin.prefix: "%plugin.sparkfbt.prefix%"
+  plugin.slug: "%plugin.sparkfbt.slug%"
+  plugin.version: "%plugin.sparkfbt.version%"
+
+services:
+  plugin-meta: "@plugin-meta-fbt"
+
+imports:
+  - { resource: services-common.yaml }
+  - { resource: services-common-free.yaml }
+  - { resource: services-product-recommendations.yaml }
+  - { resource: services-product-recommendations-free.yaml }
+  - { resource: services-sparkfbt-base.yaml }
